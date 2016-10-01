@@ -23,7 +23,14 @@ class App extends Component {
     })
     //test localStorage household code
     localStorage.setItem('household', this.state.household)
+    // localStorage.removeItem(this.state.household);
   }
+  
+  componentDidMount() {
+    console.log(localStorage.household);
+      this.setState({household: localStorage.household})
+  }
+
 
   authHandler(error, data) {
     if (error) {

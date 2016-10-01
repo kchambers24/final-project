@@ -4,6 +4,10 @@ import SideNav from './SideNav'
 import Room from './room/Room';
 
 class DashboardContainer extends Component {
+  componentDidMount() {
+  	console.log(localStorage.household);
+    	this.setState({household: localStorage.household})
+  }
   render() {
     return (
       <div className="DashboardContainer">

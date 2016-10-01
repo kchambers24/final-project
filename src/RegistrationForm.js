@@ -21,18 +21,7 @@ class RegistrationForm extends Component {
     }
 
   }
-// Testing: Im trying to pull household out of localStorage and setState
-componentDidMount() {
-  this.setState({household: localStorage.household})
-  constructor() {
-    super();
-    this.state = {
-      household: ''
-    }
-  }
-}
 
-//end of test code
 
 sendEmail(){
   console.log("beer", this.props)
@@ -59,7 +48,6 @@ sendEmail(){
   //end of email code
 
 render() {
-  console.log(localStorage.household)
   return (
     <div className="RegistrationForm">
       <div className="header">
