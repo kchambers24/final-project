@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './styles/App.css';
 import base from './config/base'
 
 class App extends Component {
   getChildContext() {
-    return {applicationUser: this.state.user}
+    return {household: this.state.household}
   }
 
   constructor(props) {
@@ -21,6 +21,8 @@ class App extends Component {
     this.setState({
       household: event.target.value
     })
+    //test localStorage household code
+    localStorage.setItem('household', this.state.household)
   }
 
   authHandler(error, data) {
@@ -31,34 +33,36 @@ class App extends Component {
       this.setState({
         user: data.user
       })
-   // const userAvatar = this.state.user.user.photoURL
-     // this.addPhoto()
       sessionStorage.setItem('currentUser', JSON.stringify(data.user))
-       this.context.router.push('/registration')
+       this.context.router.push(`/registration/${this.state.household}`)
     }
   }
 
-  handleClick(event) {
+  handleClick(event, household) {
+    household = household || null
     event.preventDefault();
-    base.authWithOAuthPopup('facebook', this.authHandler)
-    .then(() => {
-      base.post(`${this.state.household}/roommates/${this.state.user.uid}`, {
-        data: {
-         userName: this.state.user.displayName,
-         url: this.state.user.photoURL
-        },
-        then(err){
-          if(!err){
-          }
-        }
-      });
+    base.authWithOAuthPopup('facebook', this.authHandler).then(() => {
+      const loggedInUser = base.auth().currentUser;
+      if (loggedInUser != null) {
+        loggedInUser.providerData.forEach(profile => {
+          console.log("  Photo URL: "+profile.photoURL);
+          sessionStorage.setItem('UserAvatar', (profile.photoURL))
+          // sessionStorage.setItem('username', (profile.displayname))
+          base.post(`${this.state.household}/roommates/${this.state.user.uid}`, {
+            data: {
+              url: profile.photoURL,
+              userName: this.state.user.displayName
+            }
+        });
+      })
+    }
     })
   }
 
   render() {
     return (
       <div className="App">
-        {this.props.children && React.cloneElement(this.props.children, {onLogin: this.handleClick.bind(this), addHousehold: this.addHouseholdName.bind(this), applicationUser: this.state.user})}
+        {this.props.children && React.cloneElement(this.props.children, {onLogin: this.handleClick.bind(this), addHousehold: this.addHouseholdName.bind(this), household: this.state.household})}
       </div>
     );
   }
@@ -69,7 +73,7 @@ App.contextTypes = {
 }
 
 App.childContextTypes = {
- applicationUser: React.PropTypes.object.isRequired
+ household: React.PropTypes.string
 }
 
 export default App;

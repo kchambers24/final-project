@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import Chore from './Chore'
 import '../styles/ChoreView.css'
-import Rebase from 're-base'
-
-const base = Rebase.createClass({
-    apiKey: "AIzaSyDnoxYjmFPcZSQWKRNlebHr9n0pkSGOyUw",
-    authDomain: "final-project-34471.firebaseapp.com",
-    databaseURL: "https://final-project-34471.firebaseio.com",
-    storageBucket: "final-project-34471.appspot.com",
-  });
+import base from '../config/base'
 
 class Room extends Component {
   constructor(props){
@@ -20,7 +13,8 @@ class Room extends Component {
   }
 
   componentDidMount() {
-    this.rebaseRef = base.syncState(`houseone/rooms/kitchen/chores`, {
+    let roomname = this.props.room
+    this.rebaseRef = base.syncState(`${this.props.household}/rooms/${roomname}/chores`, {
       context: this,
       state: 'chores',
       asArray: true,
@@ -31,13 +25,12 @@ class Room extends Component {
     base.removeBinding(this.rebaseRef)
   }
 
-  addChore() {
-    event.preventDefault()
+  addChore(event) {
+    event.preventDefault(event)
     let chores = this.state.chores
     let chore = {
       name: this.name.value
     }
-    console.log(chore)
     this.setState({
       chores: chores.concat([chore])
     })
@@ -48,18 +41,17 @@ class Room extends Component {
     let chores = this.state.chores
     this.setState({
       chores: chores.filter(chore => deletedChore !== chore.name)
-  })
-}
+    })
+  }
 
   render() {
-
     return (
-        <div className="Room">
-          {this.state.chores.map((chore, index) => <Chore chore={chore} deleteChore={this.deleteChore.bind(this)} key={index}/>)}
-          <div className="Chore">
+      <div className="Room">
+        {this.state.chores.map((chore, index) => <Chore room={this.props.room} chore={chore} deleteChore={this.deleteChore.bind(this)} key={index}/>)}
+        <div className="Chore">
           <div className="ChoreLeft">
             <div className="ChoreName">
-            <form onSubmit={this.addChore.bind(this)}><input type="text" ref={(input) => this.name = input}/><button type="submit">Add Chore</button></form>
+              <form onSubmit={this.addChore.bind(this)}><input type="text" ref={(input) => this.name = input}/><button type="submit">Add Chore</button></form>
             </div>
             <div className="ChoreFrequency">
             </div>
@@ -67,9 +59,12 @@ class Room extends Component {
           <div className="Avatar">
           </div>
         </div>
-        </div>
+      </div>
     );
   }
+}
+Room.contextTypes = {
+ household: React.PropTypes.string
 }
 
 export default Room;

@@ -19,22 +19,23 @@ class RegistrationForm extends Component {
       urls: [],
       url: {}
     }
-  }
 
-  componentDidMount() {
-    this.rebaseRef = base.syncState(`housetwo/${this.state.user.user.UID}/url`, {
-      context: this,
-      state: 'urls',
-      asArray: true,
-    })
   }
-
-  componentWillUnmount() {
-    base.removeBinding(this.rebaseRef)
+// Testing: Im trying to pull household out of localStorage and setState
+componentDidMount() {
+  this.setState({household: localStorage.household})
+  constructor() {
+    super();
+    this.state = {
+      household: ''
+    }
   }
+}
 
-// Mandrill email sending code
+//end of test code
+
 sendEmail(){
+  console.log("beer", this.props)
   axios({
     method: "POST",
     url: "https://mandrillapp.com/api/1.0/messages/send.json",
@@ -50,7 +51,7 @@ sendEmail(){
           }
         ],
         "subject": "Your personal invite to living better!",
-        "text": "You have been invited to join iRoommates. Enjoy a better way of doing chores Click here to view our app!"
+        "html": `<html><head><body><p>You have been invited to join iRoommates. Enjoy a better way of doing chores.</p><a href='http://localhost:3000/#/inviteduser/${this.props.household}'>Click here</a></body></head></html>`
       }
     }
   });
@@ -58,6 +59,7 @@ sendEmail(){
   //end of email code
 
 render() {
+  console.log(localStorage.household)
   return (
     <div className="RegistrationForm">
       <div className="header">
@@ -88,7 +90,7 @@ render() {
       </div>
       <Link to="/dashboard">
       <div className="submitBtn">
-        <button onClick={this.handleClick}>Submit</button>
+        <button>Submit</button>
       </div>
     </Link>
 
@@ -102,5 +104,9 @@ render() {
   );
  }
 }
+RegistrationForm.contextTypes = {
+ household: React.PropTypes.string
+}
+
 
 export default RegistrationForm;

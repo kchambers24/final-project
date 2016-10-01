@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Rebase from 're-base'
-// import {Link} from 'react-router'
+import {Link, hashHistory} from 'react-router'
 import './styles/SideNav.css';
-
-const base = Rebase.createClass({
-    apiKey: "AIzaSyDnoxYjmFPcZSQWKRNlebHr9n0pkSGOyUw",
-    authDomain: "final-project-34471.firebaseapp.com",
-    databaseURL: "https://final-project-34471.firebaseio.com",
-    storageBucket: "final-project-34471.appspot.com",
-  });
+import base from './config/base'
 
 class SideNav extends Component {
   constructor() {
@@ -21,88 +15,58 @@ class SideNav extends Component {
   }
 
   componentDidMount() {
-    this.rebaseRef = base.syncState(`housetwo/rooms`, {
+    console.log("this.props.household is", this.props.household)
+    this.rebaseRef = base.syncState(`${this.props.household}/rooms`, {
       context: this,
       state: 'rooms',
       asArray: true
     })
-      this.rebaseRef = base.syncState(`housetwo/roommates`, {
+      this.rebaseRef = base.syncState(`${this.props.household}/roommates`, {
         context: this,
         state: 'people',
         asArray: true
       })
-
-  }
+    }
 
   componentWillUnmount() {
     base.removeBinding(this.rebaseRef)
   }
 
-
-  // componentDidMount() {
-  //   this.rebaseRef = base.syncState(`housetwo/roommates`, {
-  //     context: this,
-  //     state: 'people',
-  //     asArray: true
-  //   })
-  // }
-  //
-  // componentWillUnmount() {
-  //   base.removeBinding(this.rebaseRef)
-  // }
-
-
-
-
-
-  handleClick() {
-    event.preventDefault()
-    console.log("Add room button is working")
+  handleClick(event) {
+    event.preventDefault(event)
     this.setState({
       showAddRoomBox: !this.state.showAddRoomBox
     })
   }
 
-addRoom() {
-  event.preventDefault()
-  console.log("addRoomBox button is working")
-  let input = this.refs.roomInput
-  let addedRoom = input.value
-  let rooms = this.state.rooms
-  this.setState({
-    rooms: rooms.concat([addedRoom])
-  })
-}
-
-onRoomClick() {
-  event.preventDefault()
-  console.log("onRoomClick is working")
-}
-
-
+  addRoom(event) {
+    event.preventDefault(event)
+    let input = this.refs.roomInput
+    let addedRoom = {
+      roomname: input.value,
+      chores: []
+    }
+    let rooms = this.state.rooms
+    this.setState({
+      rooms: rooms.concat([addedRoom])
+    })
+    hashHistory.push(`/dashboard/${addedRoom.roomname}`)
+  }
 
   render() {
-
     let addRoomBox;
-if (this.state.showAddRoomBox) {
-  addRoomBox =
-  <div className="AddRoom">
-    <form onSubmit={this.addRoom.bind(this)}>
-      <input type="text" placeholder="room" ref="roomInput"/>
-      <button>Add room</button>
-    </form>
-  </div>
-}
-console.log(this.state.people.map((person, index) => person.userName));
+    if (this.state.showAddRoomBox) {
+      addRoomBox = <div className="AddRoom"><form onSubmit={this.addRoom.bind(this)}><input type="text" placeholder="room" ref="roomInput"/><button>Add room</button></form></div>
+    }
     return (
       <div className="SideNav">
         ChoreShare
         <div>
           <div className="NavItems">
-            <p>Calendar</p>
+            <Link to="/calendar"><p>Calendar</p></Link>
           </div>
-          <div className="NavItems">
-            <p>People</p>
+          <div>
+            <p className="NavItems">People</p>
             {this.state.people.map((person, index) => <p className="roommates" key={index}>{person.userName}</p>)}
           </div>
           <div className="NavItems AddRooms">
@@ -111,7 +75,7 @@ console.log(this.state.people.map((person, index) => person.userName));
           </div>
             <div className="NavRooms">
               <div>
-                {this.state.rooms.map((room, index) => <div onClick={this.onRoomClick.bind(this)} key={index}><p>{room.key}</p></div>)}
+                {this.state.rooms.map((room, index) => <Link to={`/dashboard/${room.roomname}`} key={index}><div><p>{room.roomname}</p></div></Link>)}
               </div>
               {addRoomBox}
             </div>
@@ -119,6 +83,9 @@ console.log(this.state.people.map((person, index) => person.userName));
       </div>
     );
   }
+}
+SideNav.contextTypes = {
+ household: React.PropTypes.string
 }
 
 export default SideNav;
