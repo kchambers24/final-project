@@ -15,9 +15,8 @@ const routes = (
       <IndexRoute component={Login} />
       <Route path="/login" component={Login}/>
       <Route path="/inviteduser/:household" component={InviteLogin}/>
-      <Route path="/registration/:household" component={RegistrationForm}/>
-      <Route path="/dashboard" component={DashboardContainer}>
-        <Route path="/dashboard/:room" component={Room}/>
+      <Route path="/dashboard/:household" component={DashboardContainer}>
+        <Route path="/dashboard/:household/:room" component={Room}/>
       </Route>
     </Route>
   </Router>

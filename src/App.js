@@ -18,19 +18,19 @@ class App extends Component {
   }
 
   addHouseholdName(event) {
-    this.setState({
-      household: event.target.value
-    })
-    //test localStorage household code
-    localStorage.setItem('household', this.state.household)
-    // localStorage.removeItem(this.state.household);
-  }
-  
-  componentDidMount() {
+      this.setState(
+        { household: event.target.value },
+        function () {
+          localStorage.setItem('household', this.state.household)
+          console.log('callback state', this.state.household);
+          console.log(localStorage.getItem('household'));
+        })
+   }
+
+  componentWillMount() {
     console.log(localStorage.household);
       this.setState({household: localStorage.household})
   }
-
 
   authHandler(error, data) {
     if (error) {
@@ -41,7 +41,7 @@ class App extends Component {
         user: data.user
       })
       sessionStorage.setItem('currentUser', JSON.stringify(data.user))
-       this.context.router.push(`/registration/${this.state.household}`)
+       this.context.router.push(`/dashboard/${this.state.household}`)
     }
   }
 
@@ -54,7 +54,6 @@ class App extends Component {
         loggedInUser.providerData.forEach(profile => {
           console.log("  Photo URL: "+profile.photoURL);
           sessionStorage.setItem('UserAvatar', (profile.photoURL))
-          // sessionStorage.setItem('username', (profile.displayname))
           base.post(`${this.state.household}/roommates/${this.state.user.uid}`, {
             data: {
               url: profile.photoURL,

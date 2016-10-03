@@ -97,6 +97,7 @@ class Chore extends Component {
           {choreClaimer}
           <button onClick={this.claimChore.bind(this)}>{buttonText}</button>
         </div>
+        
       </div>
     );
   }
