@@ -1,7 +1,7 @@
 .Room {
   background-color: #E3E3E3;
   min-width: 800px;
-  margin: 180px 0px 0px 10px;
+  margin: 0px 0px 0px 10px;
   height: 600px;
   border-radius: 10px;
   display: flex;
@@ -32,4 +32,16 @@
 
 p {
   margin: 15px 0px 0px 50px;
+}
+.TopNav {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.roomTitle {
+  font-size: 50px;
+  font-weight: 500;
 }

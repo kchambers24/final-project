@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import base from '../config/base'
+import moment from 'moment'
+// import FontAwesome from 'react-fontawesome'
 
 class Chore extends Component {
   constructor(props) {
     super(props);
-    const isClaimed = this.props.chore.claimedBy
     this.state = {
-      displayInput: false,
-      claimed: isClaimed
+      displayInput: false
     }
   }
 
@@ -17,41 +16,23 @@ class Chore extends Component {
     })
   }
 
-  addEditedChore(editedChore) {
-    event.preventDefault()
-    let roomname = this.props.room
-    base.update(`${this.props.household}/rooms/${roomname}/chores/${this.props.chore.key}`, {
-      data: {name: editedChore}
-    })
-  }
-
   handleSubmit(event) {
     event.preventDefault()
-    this.addEditedChore(this.name.value)
+    this.props.addEditedChore(this.name.value, this.props.chore.key)
     this.setState({
       displayInput: !this.state.displayInput
     })
   }
 
-  handleClick(){
-    this.props.deleteChore(this.props.chore.name)
+  claim() {
+    this.props.claimChore(this.props.chore)
+    this.setState({
+      claimed: !this.state.claimed
+    })
   }
 
-  claimChore(){
-    const thisUser = JSON.parse(sessionStorage.getItem('currentUser'))
-    let roomname = this.props.room
-    base.update(`${this.props.household}/rooms/${roomname}/chores/${this.props.chore.key}`, {
-      data: {claimedBy: thisUser.displayName}
-    })
-    if (this.state.claimed) {
-      base.update(`${this.props.household}/rooms/${roomname}/chores/${this.props.chore.key}`, {
-        data: {claimedBy: ''}
-      })
-    }
-    this.setState({
-      claimed: !this.state.claimed,
-    })
-    console.log("this.props.chore.key is", this.props.chore.key)
+  handleClick(){
+    this.props.deleteChore(this.props.chore.name)
   }
 
   render() {
@@ -63,7 +44,6 @@ class Chore extends Component {
       choreClaimer = <p>{thisUser.displayName}</p>
     }
 
-    console.log(" thisUserPhoto is", thisUserPhoto)
     let choreClaimerAvatar = <div></div>
     if (this.state.claimed) {
       choreClaimerAvatar = <div><img src={thisUserPhoto} alt="choreClaimer"/></div>
@@ -85,7 +65,9 @@ class Chore extends Component {
         <div className="ChoreLeft">
           <div className="ChoreName">
             {choreInputArea}
-          <button onClick={this.handleClick.bind(this)}>Delete</button>
+          <button onClick={this.handleClick.bind(this)}>
+            <FontAwesome className="trash"/>
+          </button>
           </div>
           <div className="ChoreFrequency">
           </div>
@@ -95,15 +77,22 @@ class Chore extends Component {
           </div>
           {choreClaimerAvatar}
           {choreClaimer}
-          <button onClick={this.claimChore.bind(this)}>{buttonText}</button>
+          <button onClick={this.claim.bind(this)}>{buttonText}</button>
         </div>
-        
+        <p>Date of move-in:</p>
+          <input
+               id="changeStarting"
+               min={moment().format('YYYY-MM-DD')}
+               type="date"
+               className="ui-input"
+               onChange={(e) => this.setState({
+                 starting: moment(e.target.value),
+                 currentlyChoosing: null,
+               })}
+             />
       </div>
     );
   }
-}
-Chore.contextTypes = {
- household: React.PropTypes.string
 }
 
 export default Chore;

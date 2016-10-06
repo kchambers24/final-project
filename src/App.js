@@ -1,36 +1,34 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import './styles/App.css';
 import base from './config/base'
 
 class App extends Component {
-  getChildContext() {
-    return {household: this.state.household}
-  }
+ getChildContext() {
+   return {household: this.state.household}
+ }
 
   constructor(props) {
     super(props);
     this.state = {
       user: {},
-      household: ''
+      household: localStorage.household
     }
     this.handleClick = this.handleClick.bind(this);
     this.authHandler = this.authHandler.bind(this);
   }
 
   addHouseholdName(event) {
-      this.setState(
-        { household: event.target.value },
-        function () {
-          localStorage.setItem('household', this.state.household)
-          console.log('callback state', this.state.household);
-          console.log(localStorage.getItem('household'));
-        })
-   }
-
-  componentWillMount() {
-    console.log(localStorage.household);
-      this.setState({household: localStorage.household})
+     this.setState(
+       { household: event.target.value },
+       function() {
+         localStorage.setItem('household', this.state.household)
+       })
   }
+
+ componentWillMount() {
+   console.log(localStorage.household);
+     this.setState({household: localStorage.household})
+ }
 
   authHandler(error, data) {
     if (error) {
@@ -45,14 +43,13 @@ class App extends Component {
     }
   }
 
-  handleClick(event, household) {
-    household = household || null
+  handleClick(event) {
     event.preventDefault();
-    base.authWithOAuthPopup('facebook', this.authHandler).then(() => {
+    base.authWithOAuthPopup('facebook', this.authHandler)
+    .then(() => {
       const loggedInUser = base.auth().currentUser;
       if (loggedInUser != null) {
         loggedInUser.providerData.forEach(profile => {
-          console.log("  Photo URL: "+profile.photoURL);
           sessionStorage.setItem('UserAvatar', (profile.photoURL))
           base.post(`${this.state.household}/roommates/${this.state.user.uid}`, {
             data: {
@@ -79,7 +76,7 @@ App.contextTypes = {
 }
 
 App.childContextTypes = {
- household: React.PropTypes.string
+household: React.PropTypes.string
 }
 
 export default App;
