@@ -8,40 +8,46 @@ class Login extends Component {
       <div className="Login">
         <div className="loginNav">
           <div className="teamContact">
+            <div className="logoNav"><a className="logoNavLink" href="#Home">
+              <img src="http://i64.tinypic.com/2rpfv6g.png" alt="Logo"/></a>
+            </div>
+            <div className="teamContactBox">
             <div className="team"><a className="aTeam" href="#team">Team</a></div>
             <div className="contact"><a className="aTeam" href="#Contact">Contact</a></div>
+            </div>
           </div>
         </div>
-        <div className="loginHouseName">
+        <div className="loginHouseName" id="Home">
+          <div className="logoSignBox">
           <div className="logoBox">
-          <div className="title">
-            <img className="roomieLogo" src="http://i67.tinypic.com/2cmlxfb.png" alt="ROOMIE"/>
-          </div>
           </div>
           <div className="householdSignInBox">
             <div className="opacityBox">
+              <div className="title">
+                <img className="roomieLogo" src="http://i67.tinypic.com/2cmlxfb.png" alt="ROOMIE"/>
+              </div>
             <div className="chooseName">
               <div className="chooseText">
-                <strong>Pink Palace? Man Cave? Animal House?</strong><br/>
-                Enter a name for the place your mail gets sent below...<br/>
-                Finish By Signing In With Facebook
+                <p className="loginTextHeader"><strong>Pink Palace? Man Cave? Animal House?</strong></p>
+                <p className="loginTextBody"><small>Enter a name for the place your mail gets sent below...<br/>
+                Finish By Signing In With Facebook</small></p>
               </div>
             </div>
 
             <form>
-              <input onChange={this.props.addHousehold} type="text" className="answerBox" placeholder="Enter Text" ref="houseInput"/>
+              <input onChange={this.props.addHousehold} type="text" className="answerBox" placeholder="Household Name" ref="houseInput"/>
             </form>
             <div>
-              <button className="loginBtn" onClick={this.props.onLogin}>
-              <i className="fa fa-facebook-square fa-2x" aria-hidden="true">  Sign in with Facebook</i>
-              </button>
+              <button className="loginBtn" onClick={this.props.onLogin}><i className="fa fa-facebook-square fa" aria-hidden="true"></i> Sign in with Facebook</button>
             </div>
             </div>
+          </div>
           </div>
         </div>
         <div className="bodyBox">
           <div className="bodyTitle">
-            <h2>A Simple Solution for All Your Roommate Needs</h2>Co-Habitation. Simplified.</div>
+            <p className="solutionText">A Simple Solution for All Your Roommate Needs</p>
+            <p className="bodySecondText">Co-Habitation. Simplified.</p></div>
           <div className="loginBody">
             <ul className="cleaningImages">
               <li className="smallerCleaningImages">
@@ -59,14 +65,14 @@ class Login extends Component {
               </li>
             </ul>
           </div>
-          <div className="bodyText">
-            <h2>Make Your Life Easier With Roomie</h2>
-            <p className="bodyParagraph">Living with people is an experience, make it a positive one. Start your roommate relationship on the right foot with Roomie.<br/>Our application allows you to easily keep tabs on household tasks. View each room in your home and what needs to be done.<br/>Need to water a plant, do laundry or load the dishwasher? It's all trackable with Roomie.</p>
-          </div>
+        </div>
+        <div className="bodyText">
+          <p className="paragraphTitle">Make Your Life Easier With Roomie</p>
+          <p className="bodyParagraph">Living with people is an experience, make it a positive one. Start your roommate relationship on the right foot with Roomie.<br/>Our application allows you to easily keep tabs on household tasks. View each room in your home and what needs to be done.<br/>Need to water a plant, do laundry or load the dishwasher? It's all trackable with Roomie.</p>
         </div>
         <div className="Team" id="team">
           <div className="teamTextHeader">
-            <img src="http://i65.tinypic.com/25p4ex4.png" alt="Profile Picture" height="152" width="800"/>
+            <img src="http://i68.tinypic.com/ot0lc3.png" alt="Profile Picture"/>
           </div>
           <div className="profileBox">
             <div className="bioBox">
@@ -84,7 +90,7 @@ class Login extends Component {
             </div>
           </div>
           <div className="teamFooter">
-            <img src="http://i65.tinypic.com/11v5cus.png" alt="Profile Picture" height="68" width="800"/>
+            <img src="http://i66.tinypic.com/jqkv82.png" alt="Profile Picture" height="64" width="800"/>
           </div>
         </div>
         <div className="contactFooter" id="Contact">

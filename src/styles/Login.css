@@ -1,29 +1,41 @@
+html {
+  font-family: 'Questrial', sans-serif;
+}
+button {
+  font-family: 'Questrial', sans-serif;
+}
 h1 {
   margin-top: 0;
   text-align: center;
   padding-top: 60px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
 }
 h2 {
   margin: 0;
   padding-top: 20px;
   padding-bottom: 10px;
   font-size: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
   color: black;
+}
+h2:hover {
+  color: #f1931f;
 }
 h2.chores {
   margin: 0;
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
   border-bottom: 1px solid black;
+}
+h3 {
+  font-family: 'Questrial', sans-serif;
 }
 p.contactTitle {
   text-align: center;
   font-size: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
   padding-top: 20px;
   font-weight: bold;
   margin: 0
@@ -31,60 +43,77 @@ p.contactTitle {
 .bodyTitle {
   text-align: center;
   color: gray;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
+  /*padding-top: 10px;*/
+}
+p.bodySecondText {
+  font-family: 'Questrial', sans-serif;
+  margin: 0;
+  color: #f1931f;
 }
 .loginNav {
   /*background-color: #0fb0bb;*/
   background-color: white;
   height: 40px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
+  position: fixed;
+  width: 100%;
 }
 
 .loginHouseName {
-  /*display: flex;
-  flex-flow: column;
-  justify-content: center;*/
   background-image: url(http://i67.tinypic.com/549m38.png);
-  min-height: 500px;
+  min-height: 650px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 317px;
+  align-content: center;
+}
+.logoSignBox {
+  font-family: 'Questrial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding-top: 120px;
 }
 .chooseName {
+  font-family: 'Questrial', sans-serif;
   font-size: 30px;
-  font-weight: bolder;
+  /*font-weight: bolder;*/
   z-index: 1;
   color: #0fb0bb;
 }
 .opacityBox {
   background: rgba(255, 255, 255, .7);
-  width: 565px;
+  width: 520px;
   text-align: center;
   padding: 5px;
   border-radius: 5px;
 }
 .answerBox {
+ font-family: 'Questrial', sans-serif;
  background-color: rgba(255, 255, 255, .6);
- border: 2px solid #262453;
  height: 25px;
  width: 250px;
  border-radius: 5px;
  color: gray;
  font-size: 15px;
- font-weight: bold;
+ /*font-weight: bold;*/
  text-align: center;
+ margin-top: 10px;
+ margin-bottom: 10px;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: gray;
+  color: #f1931f;
   text-align: center;
 }
 
 .loginBtn {
+  font-size: 20px;
   margin: 0;
-  margin-top: 10px;
-  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 10px;
+  font-family: 'Questrial', sans-serif;
   color: #3B5998;
 }
 
@@ -95,11 +124,11 @@ p.contactTitle {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
 }
 
 .footer {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
 
 }
 a:hover {
@@ -111,21 +140,36 @@ a:link {
 a.aTeam {
   color: #0fb0bb;
 }
+a.aTeam:hover {
+  color: #f1931f;
+}
 .teamContact {
   display: flex;
-  justify-content: flex-end;
-
-  font-family: 'Open Sans', sans-serif;
+  /*float: right;*/
+  justify-content: space-between;
+  font-family: 'Questrial', sans-serif;
   padding-top: 6px;
   font-size: 20px;
 }
-
+.logoNav {
+  padding-left: 10px;
+}
+.team {
+  float: right;
+  padding-right: 10px;
+}
+.teamContactBox {
+  display: flex;
+  padding-right: 10px;
+  padding-top: 4px;
+}
 li.listSocial {
+font-family: 'Questrial', sans-serif;
 padding-right: 6px;
 }
 .title {
   /*background-color: rgba(255, 255, 255, .6);*/
-  width: 360px;
+  /*width: 360px;*/
   border-radius: 5px;
 }
 .logoBox {
@@ -138,19 +182,24 @@ padding-right: 6px;
 
 }
 .bodyBox {
-  background: url(http://i67.tinypic.com/1679xs0.png);
+  font-family: 'Questrial', sans-serif;
+  /*background: url(http://i65.tinypic.com/2z8u4b4.jpg);*/
+  background: url(http://i63.tinypic.com/eq9r1u.png);
   background-repeat: no-repeat;
   background-size: cover;
-  padding-bottom: 70px;
+  /*padding-bottom: 45px;*/
+  height: 685px;
+  /*backdrop-filter: blur(3px);*/
 }
 .loginBody {
+  font-family: 'Questrial', sans-serif;
   display: flex;
   justify-content: center;
   justify-content: space-around;
   align-items: center;
   /*background: url(http://i65.tinypic.com/ety97o.png);*/
-  height: 350px;
-  font-family: 'Open Sans', sans-serif;
+  height: 476px;
+  font-family: 'Questrial', sans-serif;
 
 }
 .householdSignInBox {
@@ -158,7 +207,7 @@ padding-right: 6px;
   justify-content: center;
 
   font-size: 25px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
 }
 .cleaningPicOne {
   border: 5px solid white;
@@ -166,6 +215,7 @@ padding-right: 6px;
 }
 
 .bodyRightArticle {
+  font-family: 'Questrial', sans-serif;
   background-color: white;
   border: 5px solid white;
   border-radius: 5px;
@@ -174,12 +224,15 @@ padding-right: 6px;
   line-height: 220%;
 }
 .catchphrase {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Questrial', sans-serif;
   color: gray;
 }
 .Team {
+  font-family: 'Questrial', sans-serif;
   height: 565px;
   background: white;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 .teamTextHeader {
   text-align: center;
@@ -224,39 +277,101 @@ ul.cleaningImages {
 }
 p.choreText {
   margin: 0;
+  font-family: 'Questrial', sans-serif;
 }
 .smallerCleaningImages {
   text-align: center;
   padding: 30px;
 }
+.smallerCleaningImages:hover {
+  animation: flash 2.5s;
+  color: #f1931f;
+}
+@keyframes flash {
+  0% {
+    opacity: .4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 .teamSocial {
- padding: 20px;
+ padding-left: 20px;
+ padding-right: 20px;
+ padding-bottom: 20px;
+ padding-top: 0;
  color: white;
+ font-family: 'Questrial', sans-serif;
 }
 .fa-facebook-square {
+  /*font-family: 'Questrial', sans-serif;*/
   /*color: white;*/
+}
+.fa-facebook-square:hover {
+  color: #3B5998;
 }
 .fa-github-square {
   color: white;
 }
+.fa-github-square:hover {
+  color: #444444;
+}
 .fa-linkedin-square {
   color: white
+}
+.fa-linkedin-square:hover {
+  color: #007BB6;
 }
 .contactBox {
   display: flex;
   justify-content: center;
   background: #0fb0bb;
+  font-family: 'Questrial', sans-serif;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 .chooseText {
   font-size: 20px;
+  font-family: 'Questrial', sans-serif;
 }
 .teamFooter {
   text-align: center;
 }
 p.bodyParagraph {
   margin: 0px;
+  font-family: 'Questrial', sans-serif;
 }
+.bodyText:hover {
+  color: #f1931f;
+}
+
 .bodyText {
   text-align: center;
+  font-family: 'Questrial', sans-serif;
+  background: #0fb0bb;
+  color: white;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+p.paragraphTitle {
+  font-size: 2em;
+  margin: 0;
+  color: white;
+  padding-bottom: 10px;
+}
+p.solutionText {
+  font-size: 2em;
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: black;
+}
+p.loginTextHeader {
+  margin: 0;
+  font-size: 25px;
+
+}
+p.loginTextBody {
+  margin: 0;
 }
