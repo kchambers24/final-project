@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './styles/Login.css';
-import './styles/App.css';
+// import './styles/App.css';
 
 class InviteLogin extends Component {
   render() {
@@ -33,12 +33,11 @@ class InviteLogin extends Component {
                 <div className="chooseName">
                   <div className="chooseText">
                     <p className="loginTextHeader">
-                      <strong>Welcome to ROOMIE</strong>
+                      <strong>Welcome to {this.props.household}</strong>
                     </p>
                     <p className="loginTextBody">
                       <small>Continue with Facebook</small>
                     </p>
-                    <br/>
                   </div>
                 </div>
                 <div>

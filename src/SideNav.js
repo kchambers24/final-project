@@ -40,26 +40,30 @@ class SideNav extends Component {
   render() {
     let addRoomBox;
     if (this.state.showAddRoomBox) {
-      addRoomBox = <div className="AddRoom"><form onSubmit={this.props.handleSubmit}><input type="text" placeholder="room"/><button>Add room</button></form></div>
+      addRoomBox = <div className="AddRoom"><form className="formAddRoom" onSubmit={this.props.handleSubmit}><input className="sideNavAddRoomInput" type="text" placeholder="Add Room"/><button className="addRoomBtn"><i className="fa fa-plus" aria-hidden="true"/></button></form></div>
     }
     return (
       <div className="SideNav">
-        ChoreShare
+        <div className="sideNavLogo">
+          <img className="dashboardLogo" src="http://i64.tinypic.com/4hsdop.png" alt="LOGO" width="200" height="81"/>
+        </div>
+        <p className="sideNavHousehold">{this.props.household}</p>
         <div>
-          <div className="NavItems">
-            <Link to="/calendar"><p>Calendar</p></Link>
-          </div>
           <div>
-            <p className="NavItems">People</p>
+            <p className="navRoommates">Roommates</p>
             {this.state.people.map((person, index) => <p className="roommates" key={index}>{person.userName}</p>)}
           </div>
-          <div className="NavItems AddRooms">
-            <p>Rooms</p>
-            <button onClick={this.handleClick.bind(this)}>Add room</button>
+          <div className="AddRooms">
+            <div className="addRoomsText">
+            <p className="roomsBtn">Rooms</p>
+            </div>
+            <div className="sideNavRoomBtn">
+            <button className="addRoomBtn" onClick={this.handleClick.bind(this)}><i className="fa fa-plus" aria-hidden="true"/></button>
+            </div>
           </div>
             <div className="NavRooms">
               <div>
-                {this.props.rooms.map((room, index) => <Link to={`/dashboard/${this.props.household}/${room.roomname}`} key={index}><div><p>{room.roomname}</p></div></Link>)}
+                {this.props.rooms.map((room, index) => <Link to={`/dashboard/${this.props.household}/${room.roomname}`} key={index}><div><p className="sideNavRooms">{room.roomname}</p></div></Link>)}
               </div>
               {addRoomBox}
             </div>

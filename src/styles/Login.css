@@ -196,9 +196,10 @@ padding-right: 6px;
   display: flex;
   justify-content: center;
   justify-content: space-around;
+  flex-wrap: wrap;
   align-items: center;
   /*background: url(http://i65.tinypic.com/ety97o.png);*/
-  height: 476px;
+  height: 420px;
   font-family: 'Questrial', sans-serif;
 
 }
@@ -272,6 +273,7 @@ ul.socialIcons {
 ul.cleaningImages {
   list-style: none;
   display: flex;
+  /*flex-wrap: wrap;*/
   margin: 0;
   padding-left: 0;
 }
@@ -374,4 +376,6 @@ p.loginTextHeader {
 }
 p.loginTextBody {
   margin: 0;
+  padding-top: 5px;
+  padding-bottom: 8px;
 }

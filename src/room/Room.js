@@ -3,14 +3,17 @@ import Chore from './Chore'
 import '../styles/ChoreView.css'
 
 class Room extends Component {
-  render() {
+
+render() {
     return (
       <div className="Room">
-        {this.props.chores.map((chore, index) => <Chore room={this.props.room} chore={chore} deleteChore={this.props.deleteChore} addEditedChore={this.props.addEditedChore} claimChore={this.props.claimChore} key={index}/>)}
+        {this.props.selectedRoom().map((chore, index) => <Chore rooms={this.props.rooms} room={this.props.room} chore={chore} deleteChore={this.props.deleteChore} addEditedChore={this.props.addEditedChore} claimChore={this.props.claimChore}
+        setDueDate={this.props.setDueDate}
+        completeChore={this.props.completeChore} key={index}/>)}
         <div className="Chore">
           <div className="ChoreLeft">
             <div className="ChoreName">
-              <form onSubmit={this.props.handleSubmit}><input type="text"/><button type="submit">Add Chore</button></form>
+              <form className="formChoreInput" onSubmit={this.props.handleSubmit}><input className="choreInput" type="text" placeholder="What needs to be done?"/><button className="choreAddBtn" type="submit"><i className="fa fa-plus" aria-hidden="true"/></button></form>
             </div>
             <div className="ChoreFrequency">
             </div>
