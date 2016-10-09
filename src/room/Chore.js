@@ -92,7 +92,7 @@ class Chore extends Component {
     </div>
     if (this.state.displayInput) {
       choreInputArea = <form onSubmit={this.handleSubmit.bind(this)}><input type="text" ref={(input) => this.name = input}/>
-        <button className="editingBtn">I'm done editing</button>
+        <button className="editingBtn">Edit chore</button>
       </form>
     }
     return (
