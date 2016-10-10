@@ -1,5 +1,5 @@
 .SideNav {
-  background: rgba(15, 176, 187, .6);
+  background: rgba(15, 176, 187, .5);
   height: 1190px;
   width: 250px;
   padding-left: 10px;
@@ -36,7 +36,7 @@ p.roommates:hover {
   margin-bottom: 5px;
 }
 button.addRoomBtn {
-
+ margin-left: 12px;
 }
 .NavRooms {
   font-size: 18px;
@@ -50,7 +50,7 @@ p.sideNavRooms:hover {
 }
 .sideNavRoomBtn {
   padding-top: 21px;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 .sideNavAddRoomInput {
   font-size: 14px;
@@ -66,4 +66,19 @@ p.sideNavRooms:hover {
 }
 .dashboardLogo {
   padding-top: 10px;
+}
+.addRoomTrashBox {
+}
+.trashBinBtn {
+  float: right;
+  margin-right: 10px;
+}
+button.trashBinBtn:hover {
+  color: white;
+  background: #ff6961;
+}
+button.trashBinBtn {
+  border-radius: 5px;
+  background: white;
+  border: 2px solid #0fb0bb;
 }

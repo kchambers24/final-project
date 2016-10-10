@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router'
 import './styles/SideNav.css';
 import base from './config/base'
@@ -13,22 +13,22 @@ class SideNav extends Component {
   }
 
   componentDidMount() {
-     console.log("this.props.household is", this.props.household)
-     this.rebaseRef = base.syncState(`${this.props.household}/rooms`, {
-       context: this,
-       state: 'rooms',
-       asArray: true
-     })
-       this.rebaseRef = base.syncState(`${this.props.household}/roommates`, {
-         context: this,
-         state: 'people',
-         asArray: true
-       })
-     }
+    console.log("this.props.household is", this.props.household)
+    this.rebaseRef = base.syncState(`${this.props.household}/rooms`, {
+      context: this,
+      state: 'rooms',
+      asArray: true
+    })
+    this.rebaseRef = base.syncState(`${this.props.household}/roommates`, {
+      context: this,
+      state: 'people',
+      asArray: true
+    })
+  }
 
-   componentWillUnmount() {
-     base.removeBinding(this.rebaseRef)
-   }
+  componentWillUnmount() {
+    base.removeBinding(this.rebaseRef)
+  }
 
   handleClick(event) {
     event.preventDefault(event)
@@ -37,10 +37,18 @@ class SideNav extends Component {
     })
   }
 
+  delete(roomName) {
+    this.props.deleteRoom(roomName)
+  }
+
   render() {
     let addRoomBox;
     if (this.state.showAddRoomBox) {
-      addRoomBox = <div className="AddRoom"><form className="formAddRoom" onSubmit={this.props.handleSubmit}><input className="sideNavAddRoomInput" type="text" placeholder="Add Room"/><button className="addRoomBtn"><i className="fa fa-plus" aria-hidden="true"/></button></form></div>
+      addRoomBox = <div className="AddRoom">
+        <form className="formAddRoom" onSubmit={this.props.handleSubmit}><input className="sideNavAddRoomInput" type="text" placeholder="Add Room"/>
+          <button className="addRoomBtn"><i className="fa fa-plus" aria-hidden="true"/></button>
+        </form>
+      </div>
     }
     return (
       <div className="SideNav">
@@ -55,18 +63,26 @@ class SideNav extends Component {
           </div>
           <div className="AddRooms">
             <div className="addRoomsText">
-            <p className="roomsBtn">Rooms</p>
+              <p className="roomsBtn">Rooms</p>
             </div>
             <div className="sideNavRoomBtn">
-            <button className="addRoomBtn" onClick={this.handleClick.bind(this)}><i className="fa fa-plus" aria-hidden="true"/></button>
+              <button className="addRoomBtn" onClick={this.handleClick.bind(this)}><i className="fa fa-plus" aria-hidden="true"/></button>
             </div>
           </div>
-            <div className="NavRooms">
-              <div>
-                {this.props.rooms.map((room, index) => <Link to={`/dashboard/${this.props.household}/${room.roomname}`} key={index}><div><p className="sideNavRooms">{room.roomname}</p></div></Link>)}
-              </div>
-              {addRoomBox}
+          <div className="NavRooms">
+            <div className="addRoomTrashBox">
+              {this.props.rooms.map((room, index) => <Link to={`/dashboard/${this.props.household}/${room.roomname}`} key={index}>
+                <div>
+                  <p className="sideNavRooms">{room.roomname}
+                    <button className="trashBinBtn" onClick={this.delete.bind(this, room.roomname)}>
+                      <i className="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </p>
+                </div>
+              </Link>)}
             </div>
+            {addRoomBox}
+          </div>
         </div>
       </div>
     );
@@ -74,7 +90,7 @@ class SideNav extends Component {
 }
 
 SideNav.contextTypes = {
-household: React.PropTypes.string
+  household: React.PropTypes.string
 }
 
 export default SideNav;
