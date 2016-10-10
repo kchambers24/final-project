@@ -301,7 +301,7 @@ render() {
           storeClaimState={this.storeClaimState}
            />
        <div className="EmailInvite">
-                <p className="emailTextTitle">Need a ROOMIE!</p>
+                <p className="emailTextTitle">Need a ROOMIE?</p>
                <p className="emailText">Do you have that special roommate in mind? If so, we made inviting them super easy. Enter their email address below, and voila they are invited to your household. </p>
               <div className="emailInputBtn">
              <input className="emailInput" type="text" className="emailInput" placeholder="New roommate" ref="roommateEmail"/>

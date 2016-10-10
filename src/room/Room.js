@@ -8,7 +8,7 @@ class Room extends Component {
     event.preventDefault()
     this.props.handleSubmit(event)
     this.refs.input.value = ''
-    console.log("1")
+    
   }
 
   render() {
@@ -22,7 +22,6 @@ class Room extends Component {
                 <button className="choreAddBtn" type="submit"><i className="fa fa-plus" aria-hidden="true"/></button>
               </form>
             </div>
-            <div className="ChoreFrequency"></div>
           </div>
           <div className="Avatar"></div>
         </div>

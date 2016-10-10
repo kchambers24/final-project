@@ -54,6 +54,12 @@ class Chore extends Component {
     this.props.completeChore(this.state.isComplete, this.props.chore.name)
   }
 
+  unclaim() {
+     this.setState({
+       claimed: !this.state.claimed
+     })
+   }
+
   render() {
     const thisUser = JSON.parse(sessionStorage.getItem('currentUser'))
 
@@ -88,11 +94,14 @@ class Chore extends Component {
     if (this.props.chore.claimed) {
       choreClaimerAvatar = <div><img className="avatar" src={avatar} alt="choreClaimer" width="50" height="66"/></div>
     }
-
-    let buttonText = 'Claim this chore'
-    if (this.state.claimed) {
-      buttonText = 'Unclaim'
+    if (!this.state.claimed) {
+     choreClaimerAvatar = <div></div>
     }
+
+    let buttonText = <button className="claimBtns" onClick={this.claim.bind(this)}>Claim this chore</button>
+    if (this.state.claimed) {
+    buttonText = <button className="claimBtns" onClick={this.unclaim.bind(this)}>Unclaim</button>
+ }
 
     let choreInputArea = <div onClick={this.changeToInput.bind(this)} className="ChoreName">
       <p className="choreInputAreaText">{this.props.chore.name}</p>
@@ -127,8 +136,7 @@ class Chore extends Component {
             <div>
               {choreClaimer}
             </div>
-
-            <button className="claimBtns" onClick={this.claim.bind(this)}>{buttonText}</button>
+            {buttonText}
           </div>
           <div className="trashCan">
             <button className="trashCanBtn" onClick={this.handleClick.bind(this)}>
