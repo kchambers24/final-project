@@ -274,6 +274,7 @@ sendEmail(){
      }
    }
  });
+ this.refs.roommateEmail.value = ''
 }
 
 render() {

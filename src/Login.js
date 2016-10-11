@@ -75,14 +75,12 @@ class Login extends Component {
             <img src="http://i68.tinypic.com/ot0lc3.png" alt="Profile Picture"/>
           </div>
           <div className="profileBox">
-            <div className="bioBox">
+            <div className="bioBox1">
 
               <img src="http://i66.tinypic.com/a2sl0j.png" alt="Profile Picture" height="300" width="279"/>
 
             </div>
-            <div className="profileBox">
-              <img src="http://i68.tinypic.com/2ihuv0h.png" alt="Profile Picture" height="352" width="498"/>
-            </div>
+
             <div className="bioBox">
 
               <img src="http://i67.tinypic.com/2e39zt5.png" alt="Profile Picture" height="300" width="279"/>

@@ -252,6 +252,9 @@ padding-right: 6px;
   border-radius: 5px;
   background-color: white;*/
 }
+.bioBox1 {
+padding-right: 219px;
+}
 p.teamBios {
   margin-left: 0;
   padding-bottom: 10px;
@@ -341,6 +344,7 @@ p.choreText {
 }
 .teamFooter {
   text-align: center;
+  padding-top: 20px;
 }
 p.bodyParagraph {
   margin: 0px;
