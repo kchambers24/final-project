@@ -263,7 +263,7 @@ sendEmail(){
          }
        ],
        "subject": `You have been invited to join household ${this.props.household}`,
-       "html": `<html><head><body><img src="cid:header"><br><p>Dear Future Roomie,<br><br>You have been invited to join an AWESOME household. Living with people is an experience, make it a positive one. Start your roommate relationship on the right foot with Roomie.<br><br>Enjoy a better way of living with ROOMIE.<br><br>Co-Habitation. Simplified. <a href='http://localhost:3000/#/inviteduser/${this.props.household}'>Click here</a></body></head></html><br>Sincerely,<br>ROOMIE<br></p>`,
+       "html": `<html><head><body><img src="cid:header"><br><p>Dear Future Roomie,<br><br>You have been invited to join an AWESOME household. Living with people is an experience, make it a positive one. Start your roommate relationship on the right foot with Roomie.<br><br>Enjoy a better way of living with ROOMIE.<br><br>Co-Habitation. Simplified. <a href='http://roomie.finalproject.surge.sh/#/inviteduser/${this.props.household}'>Click here</a></body></head></html><br>Sincerely,<br>ROOMIE<br></p>`,
       "images": [
      {
         "type": "image/png",
