@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
-// import AddRoom from './room/AddRoom'
-import Rebase from 're-base'
+import React, {Component} from 'react';
+import {Link} from 'react-router'
 import './styles/SideNav.css';
-
-const base = Rebase.createClass({
-    apiKey: "AIzaSyDnoxYjmFPcZSQWKRNlebHr9n0pkSGOyUw",
-    authDomain: "final-project-34471.firebaseapp.com",
-    databaseURL: "https://final-project-34471.firebaseio.com",
-    storageBucket: "final-project-34471.appspot.com",
-  });
+import base from './config/base'
 
 class SideNav extends Component {
   constructor() {
     super();
     this.state = {
       showAddRoomBox: false,
-      rooms: []
+      people: []
     }
   }
 
   componentDidMount() {
-    this.rebaseRef = base.syncState('rooms', {
+    console.log("this.props.household is", this.props.household)
+    this.rebaseRef = base.syncState(`${this.props.household}/rooms`, {
       context: this,
       state: 'rooms',
-      asArray: true,
+      asArray: true
+    })
+    this.rebaseRef = base.syncState(`${this.props.household}/roommates`, {
+      context: this,
+      state: 'people',
+      asArray: true
     })
   }
 
@@ -31,64 +30,73 @@ class SideNav extends Component {
     base.removeBinding(this.rebaseRef)
   }
 
-  handleClick() {
-    event.preventDefault()
-    console.log("Add room button is working")
+  handleClick(event) {
+    event.preventDefault(event)
     this.setState({
       showAddRoomBox: !this.state.showAddRoomBox
     })
   }
 
-addRoom() {
+  delete(roomName) {
+    this.props.deleteRoom(roomName)
+  }
+
+  handleSubmit(event) {
   event.preventDefault()
-  console.log("addRoomBox button is working")
-  let input = this.refs.roomInput
-  let addedRoom = input.value
-  let rooms = this.state.rooms
-  this.setState({
-    rooms: rooms.concat([addedRoom])
-  })
+  this.props.handleSubmit(event)
+  this.refs.input.value = ''
 }
 
   render() {
-
     let addRoomBox;
-if (this.state.showAddRoomBox) {
-  addRoomBox =
-  <div className="AddRoom">
-    <form onSubmit={this.addRoom.bind(this)}>
-      <input type="text" placeholder="room" ref="roomInput"/>
-      <button>Add room</button>
-    </form>
-  </div>
-}
-
+    if (this.state.showAddRoomBox) {
+      addRoomBox = <div className="AddRoom">
+        <form className="formAddRoom" onSubmit={this.handleSubmit.bind(this)}><input ref="input" className="sideNavAddRoomInput" type="text" placeholder="Add Room"/>
+          <button className="addRoomBtn"><i className="fa fa-plus" aria-hidden="true"/></button>
+        </form>
+      </div>
+    }
     return (
       <div className="SideNav">
-        ChoreShare
+        <div className="sideNavLogo">
+          <img className="dashboardLogo" src="http://i64.tinypic.com/4hsdop.png" alt="LOGO" width="200" height="81"/>
+        </div>
+        <p className="sideNavHousehold">{this.props.household}</p>
         <div>
-          <div className="NavItems">
-            <p>Calendar</p>
+          <div>
+            <p className="navRoommates">Roommates</p>
+            {this.state.people.map((person, index) => <p className="roommates" key={index}>{person.userName}</p>)}
           </div>
-          <div className="NavItems">
-            <p>People</p>
-          </div>
-          <div className="NavItems AddRooms">
-            <p>Rooms</p>
-            <button onClick={this.handleClick.bind(this)}>Add room</button>
-          </div>
-            <div className="NavRooms">
-              <div>
-                <p>Kitchen</p>
-                <p>Bathroom</p>
-                {this.state.rooms.map((room, index) => <p key={index}>{room}</p>)}
-              </div>
-              {addRoomBox}
+          <div className="AddRooms">
+            <div className="addRoomsText">
+              <p className="roomsBtn">Rooms</p>
             </div>
+            <div className="sideNavRoomBtn">
+              <button className="addRoomBtn" onClick={this.handleClick.bind(this)}><i className="fa fa-plus" aria-hidden="true"/></button>
+            </div>
+          </div>
+          <div className="NavRooms">
+            <div className="addRoomTrashBox">
+              {this.props.rooms.map((room, index) => <Link to={`/dashboard/${this.props.household}/${room.roomname}`} key={index}>
+                <div>
+                  <p className="sideNavRooms">{room.roomname}
+                    <button className="trashBinBtn" onClick={this.delete.bind(this, room.roomname)}>
+                      <i className="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </p>
+                </div>
+              </Link>)}
+            </div>
+            {addRoomBox}
+          </div>
         </div>
       </div>
     );
   }
+}
+
+SideNav.contextTypes = {
+  household: React.PropTypes.string
 }
 
 export default SideNav;
